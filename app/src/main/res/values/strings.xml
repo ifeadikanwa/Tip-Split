@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Tip &amp; Split</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bill_total">Bill Total</string>
+    <string name="final_bill">FINAL BILL TOTAL</string>
+    <string name="bill">BILL</string>
+    <string name="per_person">PER PERSON</string>
+    <string name="round_up">Round Up</string>
+    <string name="round_down">Round Down</string>
+    <string name="tips_all_caps">TIPS</string>
+    <string name="tips">Tips</string>
+    <string name="split">Split</string>
+    <string name="share">share</string>
+    <string name="copy">copy</string>
+    <string name="settings">settings</string>
+
+</resources>

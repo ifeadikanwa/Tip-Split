@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.TipSplit" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/neon_orange</item>
+        <item name="colorPrimaryVariant">@color/dull_orange</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/light_orange</item>
+        <item name="colorSecondaryVariant">@color/lighter_orange</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="PrimaryText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/neon_orange</item>
+    </style>
+
+    <style name="PrimaryNumber" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SecondaryNumber" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BillCards" parent="CardView">
+        <item name="android:backgroundTint">@color/card_background</item>
+        <item name="cardCornerRadius">8dp</item>
+    </style>
+
+    <style name="IconsCards" parent="CardView">
+        <item name="android:backgroundTint">@color/dull_orange</item>
+        <item name="cardCornerRadius">20dp</item>
+    </style>
+
+</resources>
