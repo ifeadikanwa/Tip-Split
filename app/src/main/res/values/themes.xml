@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TipSplit" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.TipSplit" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/neon_orange</item>
         <item name="colorPrimaryVariant">@color/dull_orange</item>
@@ -14,6 +14,12 @@
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16sp</item>
+
+        <item name="toolbarStyle">@style/LightToolBar</item>
+    </style>
+
+    <style name="LightToolBar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/white</item>
     </style>
 
     <style name="PrimaryText" parent="TextAppearance.AppCompat">
