@@ -11,6 +11,7 @@
     <color name="dull_orange">#FF6219</color>
     <color name="light_orange">#FFA500</color>
     <color name="lighter_orange">#FFB52E</color>
+    <color name="tangerine">#F08000</color>
 
-    <color name="card_background">#f7f7f7</color>
+    <color name="bill_card_background">#f7f7f7</color>
 </resources>

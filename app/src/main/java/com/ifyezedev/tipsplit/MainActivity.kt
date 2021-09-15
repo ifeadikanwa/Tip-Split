@@ -9,7 +9,7 @@ import com.ifyezedev.tipsplit.calculator.CalculatorFragment
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_calculator)
+        setContentView(R.layout.fragment_settings)
 
     }
 }
