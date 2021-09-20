@@ -20,5 +20,8 @@
     <string name="appreciation_text">Support its developer!\nI really appreciate your support.</string>
     <string name="coffee_cost">$ 1.99</string>
     <string name="ramen_cost">$ 4.99</string>
+    <string name="app_theme">App theme</string>
+    <string name="system_default">System default</string>
+    <string name="light_mode">Light mode</string>
 
 </resources>
