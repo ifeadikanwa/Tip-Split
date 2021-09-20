@@ -1,4 +1,4 @@
-package com.ifyezedev.tipsplit.settings
+package com.ifyezedev.tipsplit.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore

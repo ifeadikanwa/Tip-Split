@@ -1,4 +1,4 @@
-package com.ifyezedev.tipsplit.settings
+package com.ifyezedev.tipsplit.data
 
 import androidx.appcompat.app.AppCompatDelegate
 

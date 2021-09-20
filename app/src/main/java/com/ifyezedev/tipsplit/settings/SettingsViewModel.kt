@@ -2,19 +2,21 @@ package com.ifyezedev.tipsplit.settings
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModel
-import com.ifyezedev.tipsplit.Repository
+import androidx.lifecycle.viewModelScope
+import com.ifyezedev.tipsplit.data.AppTheme
+import com.ifyezedev.tipsplit.data.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(val repository: Repository) : ViewModel() {
     private val TAG = "Settings ViewModel"
+    val mode = repository.getTheme()
 
     fun changeAppTheme(theme: AppTheme) {
-        when(theme){
-            AppTheme.SYSTEM_DEFAULT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            AppTheme.LIGHT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            AppTheme.DARK -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        viewModelScope.launch {
+            repository.saveAppTheme(theme)
         }
     }
 

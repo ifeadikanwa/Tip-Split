@@ -1,9 +1,7 @@
-package com.ifyezedev.tipsplit
+package com.ifyezedev.tipsplit.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
-import com.ifyezedev.tipsplit.settings.AppTheme
-import com.ifyezedev.tipsplit.settings.AppThemePreference
 import javax.inject.Inject
 import javax.inject.Singleton
 
