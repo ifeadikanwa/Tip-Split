@@ -72,10 +72,16 @@ dependencies {
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+    //test
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
 
     //Hilt
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+
+    //Hamcrest
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+
 }
 
 kapt {

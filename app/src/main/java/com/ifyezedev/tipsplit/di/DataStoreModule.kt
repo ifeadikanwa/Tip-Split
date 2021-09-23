@@ -2,6 +2,7 @@ package com.ifyezedev.tipsplit.di
 
 import android.content.Context
 import com.ifyezedev.tipsplit.data.AppThemePreference
+import com.ifyezedev.tipsplit.data.IAppThemePreference
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,7 @@ object DataStoreModule {
 
     @Provides
     @Singleton
-    fun provideDataStore(@ApplicationContext appContext: Context) : AppThemePreference {
+    fun provideDataStore(@ApplicationContext appContext: Context) : IAppThemePreference {
         return AppThemePreference(appContext)
     }
 }

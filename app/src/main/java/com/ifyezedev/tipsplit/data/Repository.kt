@@ -2,14 +2,15 @@ package com.ifyezedev.tipsplit.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Repository @Inject constructor(private val appThemePreference: AppThemePreference) {
+class Repository @Inject constructor(private val appThemePreference: IAppThemePreference) {
 
-    suspend fun saveAppTheme(theme: AppTheme) = appThemePreference.saveAppTheme(theme)
+    suspend fun saveAppTheme(theme: IAppTheme) = appThemePreference.saveAppTheme(theme)
 
-    fun getTheme() : LiveData<Int> = appThemePreference.themeFlow.asLiveData()
+    fun getThemeFlow() : Flow<Int> = appThemePreference.themeFlow
 
 }
