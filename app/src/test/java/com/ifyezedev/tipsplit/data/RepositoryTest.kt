@@ -12,9 +12,9 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class RepositoryTest {
-    val theme1 = FakeAppTheme.SYSTEM_DEFAULT
-    val theme2 = FakeAppTheme.DARK
-    val theme3 = FakeAppTheme.LIGHT
+    val theme1 = AppTheme.SYSTEM_DEFAULT
+    val theme2 = AppTheme.DARK
+    val theme3 = AppTheme.LIGHT
     lateinit var appThemePreference: FakeAppThemePreference
 
     //class under test
@@ -35,17 +35,13 @@ class RepositoryTest {
     }
 
     @Test
-    fun getTheme_requestsThemeFromPreference_themeEqualsTheme1Mode() = runBlocking {
+    fun getTheme_requestsThemeFromPreference_themeModeEqualsTheme1Mode() = runBlocking {
         var themeMode: Int? = null
-
-        //Given
-        repository.saveAppTheme(theme3)
 
         //when we request the theme from preference
         repository.getThemeFlow().collect{
             themeMode = it
         }
-
 
         //then themeMode equals app theme mode in the preference
         assertThat(themeMode, IsEqual(appThemePreference.appTheme.mode))

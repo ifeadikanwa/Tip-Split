@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface IAppThemePreference {
     val themeFlow: Flow<Int>
-    suspend fun saveAppTheme(theme: IAppTheme)
+    suspend fun saveAppTheme(theme: AppTheme)
 }

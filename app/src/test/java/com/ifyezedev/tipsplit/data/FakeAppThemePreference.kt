@@ -5,18 +5,13 @@ import com.ifyezedev.tipsplit.data.IAppThemePreference
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FakeAppThemePreference(var appTheme: IAppTheme) : IAppThemePreference {
-    override suspend fun saveAppTheme(theme: IAppTheme) {
+class FakeAppThemePreference(var appTheme: AppTheme) : IAppThemePreference {
+    override suspend fun saveAppTheme(theme: AppTheme) {
         appTheme = theme
     }
 
     override val themeFlow: Flow<Int> = flow {
         emit(appTheme.mode)
     }
-
-    fun themeFlowFunction(): Flow<Int> = flow {
-        emit(appTheme.mode)
-    }
-
 
 }

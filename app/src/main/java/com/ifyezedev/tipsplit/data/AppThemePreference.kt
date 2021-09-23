@@ -16,7 +16,7 @@ class AppThemePreference(val context: Context) : IAppThemePreference {
         val USER_THEME_KEY = intPreferencesKey("user_theme")
     }
 
-    override suspend fun saveAppTheme(theme: IAppTheme){
+    override suspend fun saveAppTheme(theme: AppTheme){
         context.dataStore.edit {
             it[USER_THEME_KEY] = theme.mode
         }

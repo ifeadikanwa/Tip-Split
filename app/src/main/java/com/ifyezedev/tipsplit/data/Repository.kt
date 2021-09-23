@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class Repository @Inject constructor(private val appThemePreference: IAppThemePreference) {
 
-    suspend fun saveAppTheme(theme: IAppTheme) = appThemePreference.saveAppTheme(theme)
+    suspend fun saveAppTheme(theme: AppTheme) = appThemePreference.saveAppTheme(theme)
 
     fun getThemeFlow() : Flow<Int> = appThemePreference.themeFlow
 
