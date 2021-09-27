@@ -7,10 +7,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Repository @Inject constructor(private val appThemePreference: IAppThemePreference) {
+class Repository @Inject constructor(private val appThemePreference: IAppThemePreference) : IRepository {
 
-    suspend fun saveAppTheme(theme: AppTheme) = appThemePreference.saveAppTheme(theme)
+    override suspend fun saveAppTheme(theme: AppTheme) = appThemePreference.saveAppTheme(theme)
 
-    fun getThemeFlow() : Flow<Int> = appThemePreference.themeFlow
+    override fun getThemeFlow() : Flow<Int> = appThemePreference.themeFlow
 
 }
