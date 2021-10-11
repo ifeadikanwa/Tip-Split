@@ -12,6 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.android.play.core.review.model.ReviewErrorCode
 import com.ifyezedev.tipsplit.R
 import com.ifyezedev.tipsplit.data.AppTheme
 import com.ifyezedev.tipsplit.databinding.FragmentSettingsBinding
@@ -19,12 +21,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
-    lateinit var binding: FragmentSettingsBinding
-
+    private val TAG = "SETTINGS FRAGMENT"
+    private lateinit var binding: FragmentSettingsBinding
 
     //because we used the @HiltViewModel on our view models we can just call them like this
     //in our fragment/activity and hilt knows how to instantiate them
-    val settingsViewModel by viewModels<SettingsViewModel>()
+    private val settingsViewModel by viewModels<SettingsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,10 +37,46 @@ class SettingsFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
-        binding.viewModel = viewModel
+        binding.viewModel = settingsViewModel
 
-        binding.appThemeRadioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, checkedId ->
+        setupRadioButtonChangeListener()
+
+        setupModeObserver()
+
+        setupInAppReview()
+
+        return binding.root
+    }
+
+    private fun setupInAppReview() {
+        binding.rateTextView.setOnClickListener{
+            //The ReviewManager is the interface that lets your app start an in-app review flow.
+            val manager = ReviewManagerFactory.create(requireContext())
+
+            //Request a ReviewInfo object
+            val request = manager.requestReviewFlow()
+            request.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // We got the ReviewInfo object
+                    val reviewInfo = task.result
+
+                    //launch the in app review flow
+                    val flow = manager.launchReviewFlow(requireActivity(), reviewInfo)
+                    flow.addOnCompleteListener {
+                        Log.i(TAG, "flow is complete")
+                    }
+                }
+                else {
+                    // There was some problem, log or handle the error code.
+                    val reviewErrorCode = task.exception
+                    Log.i(TAG, reviewErrorCode.toString())
+                }
+            }
+        }
+    }
+
+    private fun setupRadioButtonChangeListener() {
+        binding.appThemeRadioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { _, checkedId ->
             val appTheme =
                 when(checkedId){
                     R.id.light_mode -> AppTheme.LIGHT
@@ -46,9 +84,11 @@ class SettingsFragment : Fragment() {
                     else -> AppTheme.SYSTEM_DEFAULT
                 }
 
-            viewModel.changeAppTheme(appTheme)
+            settingsViewModel.changeAppTheme(appTheme)
         })
+    }
 
+    private fun setupModeObserver() {
         settingsViewModel.mode.observe(viewLifecycleOwner, Observer {
             AppCompatDelegate.setDefaultNightMode(it)
 
@@ -58,8 +98,5 @@ class SettingsFragment : Fragment() {
                 AppTheme.SYSTEM_DEFAULT.mode -> binding.appThemeRadioGroup.check(binding.systemDefaultMode.id)
             }
         })
-
-        return binding.root
     }
-
 }
