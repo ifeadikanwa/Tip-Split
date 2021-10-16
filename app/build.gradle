@@ -26,7 +26,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -60,7 +60,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //Activity (allows adding dependency on activity)
@@ -78,7 +78,7 @@ dependencies {
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
 
     //Lifecycle
-    def lifecycle_version = "2.4.0-beta01"
+    def lifecycle_version = "2.4.0-rc01"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
@@ -95,6 +95,10 @@ dependencies {
     //Play Core
     implementation("com.google.android.play:core:1.10.2")
     implementation("com.google.android.play:core-ktx:1.8.1")
+
+    //Google Play Billing
+    def billing_version = "4.0.0"
+    implementation("com.android.billingclient:billing-ktx:$billing_version")
 
     // AndroidX Test - JVM testing
     testImplementation 'junit:junit:4.13.2'

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ifyezedev.tipsplit">
 
+    <uses-permission android:name="com.android.vending.BILLING"/>
+
     <application
         android:name=".di.TipSplitApplication"
         android:allowBackup="false"

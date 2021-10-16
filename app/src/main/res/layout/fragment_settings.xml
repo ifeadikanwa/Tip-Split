@@ -162,6 +162,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/coffee_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/coffee_cost"
@@ -196,6 +197,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/ramen_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/ramen_cost"
@@ -235,6 +237,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/fastfood_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$ 9.99"
