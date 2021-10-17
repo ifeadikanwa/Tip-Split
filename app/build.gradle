@@ -100,6 +100,10 @@ dependencies {
     def billing_version = "4.0.0"
     implementation("com.android.billingclient:billing-ktx:$billing_version")
 
+    //Volley
+    def volley_version = "1.2.0"
+    implementation "com.android.volley:volley:$volley_version"
+
     // AndroidX Test - JVM testing
     testImplementation 'junit:junit:4.13.2'
     testImplementation "androidx.arch.core:core-testing:2.1.0"

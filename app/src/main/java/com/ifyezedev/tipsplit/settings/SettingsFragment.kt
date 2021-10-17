@@ -7,12 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.android.billingclient.api.*
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.ifyezedev.tipsplit.R
 import com.ifyezedev.tipsplit.data.AppTheme
@@ -21,6 +26,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.lang.Exception
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -76,25 +83,115 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        billingClient.queryPurchasesAsync(
+            BillingClient.SkuType.INAPP,
+            PurchasesResponseListener { billingResult, purchases ->
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
+                    for (purchase in purchases) {
+                        handlePurchase(purchase)
+                    }
+                }
+            }
+        )
+    }
+
     private val purchasesUpdatedListener = PurchasesUpdatedListener{ billingResult, purchases ->
+        Log.i(TAG, "in purchase listener")
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
             for (purchase in purchases) {
                 handlePurchase(purchase)
             }
-        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
-            // Handle an error caused by a user cancelling the purchase flow.
-        } else {
-            // Handle any other error codes.
         }
     }
+
 
     private fun handlePurchase(purchase: Purchase?) {
         if(purchase != null) {
             if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED && !purchase.isAcknowledged) {
-
+                Log.i(TAG, "in handle purchases")
+                verifyPurchase(purchase)
             }
         }
     }
+
+    private fun verifyPurchase(purchase: Purchase) {
+        Log.i(TAG, "in handle purchases")
+
+        //request to our cloud function that will verify the purchase
+        val requestUrl = "https://us-central1-tip-split-a45b6.cloudfunctions.net/verifyPurchase" + "?" +
+                "purchaseToken=" + purchase.purchaseToken + "&" +
+                "purchaseTime=" + purchase.purchaseTime + "&" +
+                "orderId=" + purchase.orderId
+
+        val stringRequest = StringRequest(
+            Request.Method.POST,
+            requestUrl,
+            { response ->
+                try{
+                    Log.i(TAG, "in handle purchases- stringRequest response")
+                    val purchaseInfoFromServer = JSONObject(response)
+                    if (purchaseInfoFromServer.getBoolean("isValid")) {
+
+                        //for one time purchase use this:
+                        //lifecycleScope.launch(Dispatchers.IO) {
+                            //acknowledgeOneTimePurchase(purchase)
+                        //}
+
+
+                        //since this is a donation, we want to allow the user to purchase as many as they want
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            acknowledgeConsumablePurchase(purchase)
+                        }
+
+                    }
+                }
+                catch (error: Exception){
+                    Log.i(TAG, error.toString())
+                }
+            },
+            { error ->
+
+            }
+        )
+
+        Volley.newRequestQueue(requireContext()).add(stringRequest)
+    }
+
+    private suspend fun acknowledgeConsumablePurchase(purchase: Purchase) {
+        Log.i(TAG, "in acknowledge consumable")
+        val consumeParams = ConsumeParams
+            .newBuilder()
+            .setPurchaseToken(purchase.purchaseToken)
+            .build()
+
+        val consumeResult = withContext(Dispatchers.IO) {
+            billingClient.consumePurchase(consumeParams)
+        }
+
+        if (consumeResult.billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+            //if the purchase has been acknowledged this is where we would give the user the item they bought.
+            //since this is a donation we just let the user know it was received
+        }
+    }
+
+    private suspend fun acknowledgeOneTimePurchase(purchase: Purchase) {
+        val acknowledgePurchaseParams = AcknowledgePurchaseParams
+            .newBuilder()
+            .setPurchaseToken(purchase.purchaseToken)
+            .build()
+
+        val acknowledgeResult = withContext(Dispatchers.IO) {
+            billingClient.acknowledgePurchase(acknowledgePurchaseParams)
+        }
+
+        if (acknowledgeResult.responseCode == BillingClient.BillingResponseCode.OK){
+            //if the purchase has been acknowledged this is where we would give the user the item they bought.
+            //since this is a donation we just let the user know it was received
+        }
+    }
+
 
     private fun initializeBillingClient() {
         billingClient = BillingClient.newBuilder(requireActivity())

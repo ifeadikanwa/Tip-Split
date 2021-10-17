@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "90521434055",
+    "project_id": "tip-split-a45b6",
+    "storage_bucket": "tip-split-a45b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90521434055:android:56d4b8c93cbd0748bbcbe2",
+        "android_client_info": {
+          "package_name": "com.ifyezedev.tipsplit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90521434055-vrpn1c6l2nsurve3rne0jk7f7h13umke.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrx6bRq56fuIFEKC-p89mBj_SHIHfj8z0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90521434055-vrpn1c6l2nsurve3rne0jk7f7h13umke.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
