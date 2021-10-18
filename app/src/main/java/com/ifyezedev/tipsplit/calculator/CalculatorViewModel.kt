@@ -43,8 +43,10 @@ class CalculatorViewModel: ViewModel() {
     private val zeroDouble = "0.00"
 
     init {
-        _currentTipPercentage.value = "0%"
-        _currentSplitNumber.value = "1"
+        //set seekbar initial values
+        val initialSeekBarValue = "0"
+        _currentTipPercentage.value = "$initialSeekBarValue%"
+        _currentSplitNumber.value = initialSeekBarValue
 
         resetAllBillValues()
     }
@@ -89,8 +91,8 @@ class CalculatorViewModel: ViewModel() {
     }
 
     private fun calculateSplit(splitNumber: Int, totalBill: Double, totalTips: Double) {
-        val splitBill = totalBill / splitNumber
-        val splitTips = totalTips / splitNumber
+        val splitBill = if(splitNumber != 0) totalBill / splitNumber else totalBill
+        val splitTips = if(splitNumber != 0) totalTips / splitNumber else totalTips
 
         _splitPerPersonBill.value = String.format("%.2f", splitBill)
         _splitPerPersonTips.value = String.format("%.2f", splitTips)

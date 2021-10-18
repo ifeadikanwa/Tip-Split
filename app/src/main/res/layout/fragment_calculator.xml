@@ -87,7 +87,6 @@
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginEnd="@dimen/margin_small"
             android:progress="0"
-            android:min="1"
             android:max="30"
             app:layout_constraintBottom_toBottomOf="@+id/split_number_textview"
             app:layout_constraintEnd_toStartOf="@id/seekbar_barrier"
