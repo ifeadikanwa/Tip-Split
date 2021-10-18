@@ -1,10 +1,8 @@
 package com.ifyezedev.tipsplit.calculator
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -15,6 +13,12 @@ import com.ifyezedev.tipsplit.databinding.FragmentCalculatorBinding
 
 class CalculatorFragment : Fragment() {
     lateinit var binding: FragmentCalculatorBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //let activity know fragment has an options menu
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,4 +95,35 @@ class CalculatorFragment : Fragment() {
     }
 
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.app_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.copy -> {
+                copyInformation()
+                true
+            }
+            R.id.share -> {
+                shareInformation()
+                true
+            }
+            R.id.settings -> {
+                goToSettingFragment()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun copyInformation() {
+    }
+
+    private fun shareInformation() {
+    }
+
+    private fun goToSettingFragment() {
+
+    }
 }
