@@ -5,6 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".calculator.CalculatorFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ifyezedev.tipsplit.calculator.CalculatorViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
@@ -46,6 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginEnd="@dimen/margin_small"
+            android:progress="0"
+            android:max="50"
             app:layout_constraintBottom_toBottomOf="@+id/tip_percent_textview"
             app:layout_constraintEnd_toStartOf="@id/seekbar_barrier"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,9 +64,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
+            android:text="@{viewModel.currentTipPercentage}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tip_desc_textview"
-            tools:text="20%" />
+             />
 
         <TextView
             android:id="@+id/split_desc_textview"
@@ -77,6 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginEnd="@dimen/margin_small"
+            android:progress="0"
+            android:max="30"
             app:layout_constraintBottom_toBottomOf="@+id/split_number_textview"
             app:layout_constraintEnd_toStartOf="@id/seekbar_barrier"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            tools:text="10"
+            android:text="@{viewModel.currentSplitNumber}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/split_seekbar"
@@ -142,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small"
-                    tools:text="$ 200.00"
+                    android:text="@{viewModel.finalBillTotal}"
                     style="@style/PrimaryNumber"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -163,7 +174,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small"
-                    tools:text="$ 200.00"
+                    android:text="@{viewModel.userBill}"
                     style="@style/SecondaryNumber"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/bill_only_desc_textview" />
@@ -181,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small"
-                    tools:text="$ 200.00"
+                    android:text="@{viewModel.userBillTips}"
                     style="@style/SecondaryNumber"
                     app:layout_constraintStart_toStartOf="@+id/tip_only_desc_textview"
                     app:layout_constraintTop_toBottomOf="@+id/tip_only_desc_textview" />
@@ -230,7 +241,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small"
-                    tools:text="$ 200.00"
+                    android:text="@{viewModel.finalSplitPerPersonBill}"
                     style="@style/PrimaryNumber"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -251,7 +262,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small"
-                    tools:text="$ 200.00"
+                    android:text="@{viewModel.splitPerPersonBill}"
                     style="@style/SecondaryNumber"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/split_bill_only_desc_textview" />
@@ -268,7 +279,7 @@
                     android:id="@+id/split_tip_only_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="$ 200.00"
+                    android:text="@{viewModel.splitPerPersonTips}"
                     style="@style/SecondaryNumber"
                     app:layout_constraintBaseline_toBaselineOf="@+id/split_bill_only_textview"
                     app:layout_constraintStart_toStartOf="@+id/split_tip_only_desc_textview" />

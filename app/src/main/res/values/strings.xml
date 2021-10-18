@@ -23,5 +23,6 @@
     <string name="app_theme">App theme</string>
     <string name="system_default">System default</string>
     <string name="light_mode">Light mode</string>
+    <string name="zero_starting_text">0.00</string>
 
 </resources>

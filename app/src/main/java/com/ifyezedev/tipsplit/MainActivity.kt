@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.frag_cont, SettingsFragment())
+            .replace(R.id.frag_cont, CalculatorFragment())
             .commit()
 
 
