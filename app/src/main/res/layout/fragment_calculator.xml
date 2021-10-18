@@ -11,311 +11,334 @@
             type="com.ifyezedev.tipsplit.calculator.CalculatorViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_layout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/margin_small">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/bill_total_edit_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_big"
-            android:hint="@string/bill_total"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:padding="@dimen/margin_big">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bill_total_edit_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"/>
+                android:layout_marginTop="@dimen/margin_big"
+                android:hint="@string/bill_total"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"/>
 
-        <TextView
-            android:id="@+id/tip_desc_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_big"
-            android:text="@string/tips"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/bill_total_edit_text"
-            app:layout_constraintTop_toBottomOf="@+id/bill_total_edit_text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <SeekBar
-            android:id="@+id/tip_seekbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:progress="0"
-            android:max="50"
-            app:layout_constraintBottom_toBottomOf="@+id/tip_percent_textview"
-            app:layout_constraintEnd_toStartOf="@id/seekbar_barrier"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tip_percent_textview" />
+            <TextView
+                android:id="@+id/tip_desc_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_big"
+                android:text="@string/tips"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/bill_total_edit_text"
+                app:layout_constraintTop_toBottomOf="@+id/bill_total_edit_text" />
 
-        <TextView
-            android:id="@+id/tip_percent_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:text="@{viewModel.currentTipPercentage}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tip_desc_textview"
-             />
+            <SeekBar
+                android:id="@+id/tip_seekbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:progress="0"
+                android:max="50"
+                app:layout_constraintBottom_toBottomOf="@+id/tip_percent_textview"
+                app:layout_constraintEnd_toStartOf="@id/seekbar_barrier"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tip_percent_textview" />
 
-        <TextView
-            android:id="@+id/split_desc_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_big"
-            android:text="@string/split"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tip_seekbar"
-            app:layout_constraintTop_toBottomOf="@+id/tip_seekbar" />
+            <TextView
+                android:id="@+id/tip_percent_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@{viewModel.currentTipPercentage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tip_desc_textview"
+                />
 
-        <SeekBar
-            android:id="@+id/split_seekbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:progress="0"
-            android:max="30"
-            app:layout_constraintBottom_toBottomOf="@+id/split_number_textview"
-            app:layout_constraintEnd_toStartOf="@id/seekbar_barrier"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/split_number_textview" />
+            <TextView
+                android:id="@+id/split_desc_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_big"
+                android:text="@string/split"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tip_seekbar"
+                app:layout_constraintTop_toBottomOf="@+id/tip_seekbar" />
 
-        <TextView
-            android:id="@+id/split_number_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:text="@{viewModel.currentSplitNumber}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/split_seekbar"
-            app:layout_constraintTop_toBottomOf="@+id/split_desc_textview" />
+            <SeekBar
+                android:id="@+id/split_seekbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:progress="0"
+                android:max="30"
+                app:layout_constraintBottom_toBottomOf="@+id/split_number_textview"
+                app:layout_constraintEnd_toStartOf="@id/seekbar_barrier"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/split_number_textview" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/seekbar_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="left"
-            app:constraint_referenced_ids="tip_percent_textview,split_number_textview"
-            tools:layout_editor_absoluteX="403dp" />
+            <TextView
+                android:id="@+id/split_number_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@{viewModel.currentSplitNumber}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/split_seekbar"
+                app:layout_constraintTop_toBottomOf="@+id/split_desc_textview" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/final_bill_cardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/BillCards"
-            android:layout_marginTop="@dimen/margin_large"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/split_seekbar">
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/seekbar_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="left"
+                app:constraint_referenced_ids="tip_percent_textview,split_number_textview"
+                tools:layout_editor_absoluteX="403dp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/final_bill_cardView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/margin_big"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp">
+                android:layout_height="wrap_content"
+                style="@style/BillCards"
+                android:layout_marginTop="@dimen/margin_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/split_seekbar">
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/final_bill_guideline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/margin_big"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp">
 
-                <TextView
-                    android:id="@+id/final_bill_desc_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_big"
-                    android:text="@string/final_bill"
-                    style="@style/PrimaryText"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/final_bill_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
 
-                <TextView
-                    android:id="@+id/final_bill_total_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:text="@{viewModel.finalBillTotal}"
-                    style="@style/PrimaryNumber"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/final_bill_desc_textview" />
+                    <TextView
+                        android:id="@+id/final_bill_desc_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_big"
+                        android:text="@string/final_bill"
+                        style="@style/PrimaryText"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
-                <TextView
-                    android:id="@+id/bill_only_desc_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_big"
-                    android:text="@string/bill"
-                    app:layout_constraintStart_toStartOf="@+id/bill_only_textview"
-                    app:layout_constraintTop_toBottomOf="@+id/final_bill_total_textview" />
+                    <TextView
+                        android:id="@+id/final_bill_total_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="@{viewModel.finalBillTotal}"
+                        style="@style/PrimaryNumber"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/final_bill_desc_textview" />
 
-                <TextView
-                    android:id="@+id/bill_only_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:text="@{viewModel.userBill}"
-                    style="@style/SecondaryNumber"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/bill_only_desc_textview" />
+                    <TextView
+                        android:id="@+id/bill_only_desc_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_big"
+                        android:text="@string/bill"
+                        app:layout_constraintStart_toStartOf="@+id/bill_only_textview"
+                        app:layout_constraintTop_toBottomOf="@+id/final_bill_total_textview" />
 
-                <TextView
-                    android:id="@+id/tip_only_desc_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tips_all_caps"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/bill_only_desc_textview"
-                    app:layout_constraintStart_toStartOf="@+id/final_bill_guideline" />
+                    <TextView
+                        android:id="@+id/bill_only_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="@{viewModel.userBill}"
+                        style="@style/SecondaryNumber"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/bill_only_desc_textview" />
 
-                <TextView
-                    android:id="@+id/tip_only_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:text="@{viewModel.userBillTips}"
-                    style="@style/SecondaryNumber"
-                    app:layout_constraintStart_toStartOf="@+id/tip_only_desc_textview"
-                    app:layout_constraintTop_toBottomOf="@+id/tip_only_desc_textview" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/tip_only_desc_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tips_all_caps"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/bill_only_desc_textview"
+                        app:layout_constraintStart_toStartOf="@+id/final_bill_guideline" />
 
-        </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/tip_only_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="@{viewModel.userBillTips}"
+                        style="@style/SecondaryNumber"
+                        app:layout_constraintStart_toStartOf="@+id/tip_only_desc_textview"
+                        app:layout_constraintTop_toBottomOf="@+id/tip_only_desc_textview" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/split_cardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/BillCards"
-            android:layout_marginTop="@dimen/margin_big"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/final_bill_cardView">
+            </androidx.cardview.widget.CardView>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/split_cardView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/margin_big"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp">
+                android:layout_height="wrap_content"
+                style="@style/BillCards"
+                android:layout_marginTop="@dimen/margin_big"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/final_bill_cardView">
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/split_bill_guideline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/margin_big"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="0dp">
 
-                <TextView
-                    android:id="@+id/split_bill_desc_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_big"
-                    android:text="@string/per_person"
-                    style="@style/PrimaryText"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/split_bill_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
 
-                <TextView
-                    android:id="@+id/split_bill_total_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:text="@{viewModel.finalSplitPerPersonBill}"
-                    style="@style/PrimaryNumber"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/split_bill_desc_textview" />
+                    <TextView
+                        android:id="@+id/split_bill_desc_textview"
+                        style="@style/PrimaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_big"
+                        android:text="@string/per_person"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/split_bill_only_desc_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_big"
-                    android:text="@string/bill"
-                    app:layout_constraintStart_toStartOf="@+id/split_bill_only_textview"
-                    app:layout_constraintTop_toBottomOf="@+id/split_bill_total_textview" />
+                    <TextView
+                        android:id="@+id/split_bill_total_textview"
+                        style="@style/PrimaryNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="@{viewModel.finalSplitPerPersonBill}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/split_bill_desc_textview" />
 
-                <TextView
-                    android:id="@+id/split_bill_only_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:text="@{viewModel.splitPerPersonBill}"
-                    style="@style/SecondaryNumber"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/split_bill_only_desc_textview" />
+                    <TextView
+                        android:id="@+id/split_bill_only_desc_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_big"
+                        android:text="@string/bill"
+                        app:layout_constraintStart_toStartOf="@+id/split_bill_only_textview"
+                        app:layout_constraintTop_toBottomOf="@+id/split_bill_total_textview" />
 
-                <TextView
-                    android:id="@+id/split_tip_only_desc_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tips_all_caps"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/split_bill_only_desc_textview"
-                    app:layout_constraintStart_toStartOf="@+id/split_bill_guideline" />
+                    <TextView
+                        android:id="@+id/split_bill_only_textview"
+                        style="@style/SecondaryNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="@{viewModel.splitPerPersonBill}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/split_bill_only_desc_textview" />
 
-                <TextView
-                    android:id="@+id/split_tip_only_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.splitPerPersonTips}"
-                    style="@style/SecondaryNumber"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/split_bill_only_textview"
-                    app:layout_constraintStart_toStartOf="@+id/split_tip_only_desc_textview" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/split_tip_only_desc_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tips_all_caps"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/split_bill_only_desc_textview"
+                        app:layout_constraintStart_toStartOf="@+id/split_bill_guideline" />
 
-        </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/split_tip_only_textview"
+                        style="@style/SecondaryNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.splitPerPersonTips}"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/split_bill_only_textview"
+                        app:layout_constraintStart_toStartOf="@+id/split_tip_only_desc_textview" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/round_up_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_big"
-            android:text="@string/round_up"
-            android:contentDescription="@string/round_up"
-            app:layout_constraintEnd_toStartOf="@+id/button_guideline"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/split_cardView" />
+            </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/round_down_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_big"
-            android:text="@string/round_down"
-            android:contentDescription="@string/round_down"
-            app:layout_constraintBaseline_toBaselineOf="@+id/round_up_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/button_guideline" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/button_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+                android:text="@string/round_total"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/split_cardView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/round_up_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_big"
+                android:layout_marginStart="@dimen/margin_big"
+                android:layout_marginBottom="@dimen/margin_big"
+                android:contentDescription="@string/round_up"
+                android:text="@string/up"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_guideline"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <Button
+                android:id="@+id/round_down_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_big"
+                android:layout_marginStart="@dimen/margin_big"
+                android:layout_marginBottom="@dimen/margin_big"
+                android:text="@string/down"
+                android:contentDescription="@string/round_down"
+                app:layout_constraintBaseline_toBaselineOf="@+id/round_up_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/button_guideline" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/button_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
 </layout>

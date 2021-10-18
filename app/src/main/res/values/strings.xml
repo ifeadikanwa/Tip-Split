@@ -24,5 +24,8 @@
     <string name="system_default">System default</string>
     <string name="light_mode">Light mode</string>
     <string name="zero_starting_text">0.00</string>
+    <string name="round_total">Round Total</string>
+    <string name="up">up</string>
+    <string name="down">down</string>
 
 </resources>
