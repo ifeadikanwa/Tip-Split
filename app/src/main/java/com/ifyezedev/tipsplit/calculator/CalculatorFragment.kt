@@ -3,6 +3,7 @@ package com.ifyezedev.tipsplit.calculator
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -139,6 +140,16 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun shareInformation() {
+        val information = viewModel.getCalculatedInformation(binding.splitSeekbar.progress)
+
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, information)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, "Share: ")
+        startActivity(shareIntent)
     }
 
     private fun goToSettingFragment() {
