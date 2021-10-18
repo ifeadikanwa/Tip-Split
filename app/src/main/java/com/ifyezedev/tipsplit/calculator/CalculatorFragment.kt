@@ -29,7 +29,7 @@ class CalculatorFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        binding.billTotalEditText.editText?.doOnTextChanged { text, start, before, count ->
+        binding.billTotalEditText.editText?.doOnTextChanged { text, _, _, _ ->
             viewModel.calculate(
                 text,
                 binding.splitSeekbar.progress,
@@ -70,6 +70,22 @@ class CalculatorFragment : Fragment() {
             }
 
         })
+
+        binding.roundUpButton.setOnClickListener {
+            viewModel.roundUp(
+                binding.billOnlyTextview.text.toString(),
+                binding.finalBillTotalTextview.text.toString(),
+                binding.splitSeekbar.progress
+            )
+        }
+
+        binding.roundDownButton.setOnClickListener {
+            viewModel.roundDown(
+                binding.billOnlyTextview.text.toString(),
+                binding.finalBillTotalTextview.text.toString(),
+                binding.splitSeekbar.progress
+            )
+        }
 
         return binding.root
     }

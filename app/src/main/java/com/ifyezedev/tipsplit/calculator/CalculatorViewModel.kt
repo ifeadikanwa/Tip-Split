@@ -1,12 +1,12 @@
 package com.ifyezedev.tipsplit.calculator
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlin.math.ceil
+import kotlin.math.floor
 
 class CalculatorViewModel: ViewModel() {
-    private val TAG = "CalculatorViewModel"
 
     private var _userBill = MutableLiveData<String>()
     val userBill: LiveData<String>
@@ -40,10 +40,11 @@ class CalculatorViewModel: ViewModel() {
     val currentSplitNumber: LiveData<String>
         get() = _currentSplitNumber
 
+    private val zeroDouble = "0.00"
+
     init {
-        val initialSeekBarsValue = 0
-        _currentTipPercentage.value = "$initialSeekBarsValue%"
-        _currentSplitNumber.value = initialSeekBarsValue.toString()
+        _currentTipPercentage.value = "0%"
+        _currentSplitNumber.value = "1"
 
         resetAllBillValues()
     }
@@ -53,18 +54,14 @@ class CalculatorViewModel: ViewModel() {
         _currentTipPercentage.value = "$tipPercentage%"
 
         if (!userBillString.isNullOrEmpty()) {
-            val userBillVar = "$userBillString".toDouble()
-            _userBill.value = String.format("%.2f", userBillVar)
+            val userBill = "$userBillString".toDouble()
 
-            val userTipsVar = calculateTips(tipPercentage, userBillVar)
-            _userBillTips.value = String.format("%.2f", userTipsVar)
+            val userTips = calculateTips(tipPercentage, userBill)
 
-            _finalBillTotal.value = String.format("%.2f", userBillVar + userTipsVar)
+            setFinalBillValues(userBill, userTips)
 
-            val (splitBillVar, splitTipsVar) = calculateSplit(splitNumber, userBillVar, userTipsVar)
-            _splitPerPersonBill.value = String.format("%.2f", splitBillVar)
-            _splitPerPersonTips.value = String.format("%.2f", splitTipsVar)
-            _finalSplitPerPersonBill.value = String.format("%.2f", splitBillVar + splitTipsVar)
+            calculateSplit(splitNumber, userBill, userTips)
+
         }
         else {
             resetAllBillValues()
@@ -72,8 +69,6 @@ class CalculatorViewModel: ViewModel() {
     }
 
     private fun resetAllBillValues() {
-        val zeroDouble = "0.00"
-
         _userBill.value = zeroDouble
         _userBillTips.value = zeroDouble
         _finalBillTotal.value = zeroDouble
@@ -83,20 +78,71 @@ class CalculatorViewModel: ViewModel() {
         _finalSplitPerPersonBill.value = zeroDouble
     }
 
+    private fun setFinalBillValues(userBill: Double, userTips: Double) {
+        _userBill.value = String.format("%.2f", userBill)
+        _userBillTips.value = String.format("%.2f", userTips)
+        _finalBillTotal.value = String.format("%.2f", userBill + userTips)
+    }
 
     private fun calculateTips(tipPercentage: Int, userBill: Double): Double {
         return (tipPercentage.toDouble() / 100.00) * userBill
     }
 
-    private fun calculateSplit(splitNumber: Int, totalBill: Double, totalTips: Double) : Pair<Double,Double> {
-        return if (splitNumber == 0) {
-            Pair(totalBill, totalTips)
-        } else {
-            val splitBill = totalBill / splitNumber
-            val splitTips = totalTips / splitNumber
+    private fun calculateSplit(splitNumber: Int, totalBill: Double, totalTips: Double) {
+        val splitBill = totalBill / splitNumber
+        val splitTips = totalTips / splitNumber
 
-            Pair(splitBill, splitTips)
-        }
+        _splitPerPersonBill.value = String.format("%.2f", splitBill)
+        _splitPerPersonTips.value = String.format("%.2f", splitTips)
+        _finalSplitPerPersonBill.value = String.format("%.2f", splitBill + splitTips)
 
     }
+
+    fun roundUp(userBillOnlyString: String?, finalBillTotalString: String?, splitNumber: Int) {
+
+        if (!userBillOnlyString.isNullOrEmpty() && !finalBillTotalString.isNullOrEmpty()){
+            if (userBillOnlyString != zeroDouble || finalBillTotalString != zeroDouble){
+
+                val finalBillTotal = finalBillTotalString.toDouble()
+                val userBillOnly = userBillOnlyString.toDouble()
+
+                val roundedBillTotal = ceil(finalBillTotal)
+
+                val newTips = roundedBillTotal - userBillOnly
+
+                val newTipPercentage = (newTips / userBillOnly) * 100.0
+
+                _currentTipPercentage.value = "${newTipPercentage.toInt()}%"
+
+                setFinalBillValues(userBillOnly, newTips)
+
+                calculateSplit(splitNumber, userBillOnly, newTips)
+
+            }
+        }
+    }
+
+    fun roundDown(userBillOnlyString: String?, finalBillTotalString: String?, splitNumber: Int) {
+        if (!userBillOnlyString.isNullOrEmpty() && !finalBillTotalString.isNullOrEmpty()){
+            if (userBillOnlyString != zeroDouble || finalBillTotalString != zeroDouble){
+
+                val finalBillTotal = finalBillTotalString.toDouble()
+                val userBillOnly = userBillOnlyString.toDouble()
+
+                val roundedBillTotal = floor(finalBillTotal)
+
+                val newTips = roundedBillTotal - userBillOnly
+
+                val newTipPercentage = (newTips / userBillOnly) * 100.0
+
+                _currentTipPercentage.value = "${newTipPercentage.toInt()}%"
+
+                setFinalBillValues(userBillOnly, newTips)
+
+                calculateSplit(splitNumber, userBillOnly, newTips)
+
+            }
+        }
+    }
+
 }
