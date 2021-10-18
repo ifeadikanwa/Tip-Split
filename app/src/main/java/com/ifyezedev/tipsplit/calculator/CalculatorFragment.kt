@@ -1,9 +1,14 @@
 package com.ifyezedev.tipsplit.calculator
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.SeekBar
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +18,7 @@ import com.ifyezedev.tipsplit.databinding.FragmentCalculatorBinding
 
 class CalculatorFragment : Fragment() {
     lateinit var binding: FragmentCalculatorBinding
+    lateinit var viewModel: CalculatorViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +35,7 @@ class CalculatorFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val viewModel = ViewModelProvider(this).get(CalculatorViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CalculatorViewModel::class.java)
 
         binding.viewModel = viewModel
 
@@ -118,6 +124,18 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun copyInformation() {
+        // Gets a handle to the clipboard service.
+        val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+        val information = viewModel.getCalculatedInformation(binding.splitSeekbar.progress)
+
+        // Creates a new text clip to put on the clipboard
+        val clip: ClipData = ClipData.newPlainText("Tip & Split Calculation", information)
+
+        // Set the clipboard's primary clip.
+        clipboard.setPrimaryClip(clip)
+
+        Toast.makeText(requireContext(), "Copied!", Toast.LENGTH_SHORT).show()
     }
 
     private fun shareInformation() {

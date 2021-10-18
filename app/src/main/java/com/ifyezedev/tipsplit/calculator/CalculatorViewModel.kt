@@ -145,4 +145,10 @@ class CalculatorViewModel: ViewModel() {
         }
     }
 
+    fun getCalculatedInformation(splitNumber: Int) : String {
+        val finalBillTemplate = "Final bill: $${_finalBillTotal.value} = Bill: $${_userBill.value} + Tips: $${_userBillTips.value}"
+        val splitBillTemplate = if (splitNumber > 1)"\nBill per person = $${_finalSplitPerPersonBill.value}" else ""
+
+        return finalBillTemplate + splitBillTemplate
+    }
 }
