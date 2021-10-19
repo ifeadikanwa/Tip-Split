@@ -101,8 +101,13 @@ dependencies {
     implementation("com.android.billingclient:billing-ktx:$billing_version")
 
     //Volley
-    def volley_version = "1.2.0"
+    def volley_version = "1.2.1"
     implementation "com.android.volley:volley:$volley_version"
+
+    //Navigation
+    def nav_version = "2.3.5"
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
     // AndroidX Test - JVM testing
     testImplementation 'junit:junit:4.13.2'

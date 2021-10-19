@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.ifyezedev.tipsplit.R
 import com.ifyezedev.tipsplit.databinding.FragmentCalculatorBinding
 
@@ -153,6 +154,6 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun goToSettingFragment() {
-
+        this.findNavController().navigate(R.id.action_calculatorFragment_to_settingsFragment)
     }
 }
